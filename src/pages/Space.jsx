@@ -5,7 +5,7 @@ import { Btn } from '../components/common/Btn'
 
 const spaces = [
   {
-    imgs: ['/img/space/work1.png', '/img/space/work2.JPG', '/img/space/work3.JPG'],
+    imgs: ['/img/space/work3.JPG', '/img/space/work1.png', '/img/space/work2.JPG'],
     title: '워크존',
     descs: [
       '흔들림 없는 1400×600 / 1400×800 책상. 노트북 외에 모니터를 두거나, 작업물을 펼쳐두기에 충분한 너비예요. 취향에 따라 책상을 골라보세요',
@@ -14,16 +14,16 @@ const spaces = [
     ],
   },
   {
-    imgs: ['/img/space/lounge1.JPG', '/img/space/lounge2.JPG'],
+    imgs: ['/img/space/lounge2.JPG', '/img/space/lounge1.JPG'],
     title: '리프레시존',
     descs: [
       '집중한 만큼 편하게 쉴 수 있는 라운지. 소파와 원형테이블에서 잠시 숨을 돌려보세요',
       '간단한 식사와 간식을 드실 수 있어요. 냉장고가 있어 도시락이나 간식거리를 보관 할 수 있고, 정수기가 있으니 자유롭게 이용해주세요',
-      '저희도 무제한 스낵? 같은걸 하게 될까요?',
+      '프리랩 멤버들과 자연스럽게 대화가 오가는 공간입니다. 새로운 협업이 시작될지도 몰라요',
     ],
   },
   {
-    imgs: ['/img/space/studio1.JPG', '/img/space/studio2.JPG', '/img/space/studio3.JPG'],
+    imgs: ['/img/space/studio3.JPG', '/img/space/studio1.JPG', '/img/space/studio2.JPG'],
     title: '팟캐스트 스튜디오',
     descs: [
       '2인이 녹음하기 좋은 팟캐스트 스튜디오',
@@ -115,6 +115,14 @@ function DescItem({ text }) {
 }
 
 export default function Space() {
+  const [copied, setCopied] = useState(false)
+
+  const copyAddress = () => {
+    navigator.clipboard.writeText('서울 강서구 마곡중앙6로 66 퀸즈파크텐 B동 3층 322-323호')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
   return (
     <div className="bg-white">
 
@@ -146,7 +154,7 @@ export default function Space() {
 
         {/* 투어 예약 버튼 */}
         <div className="mt-[100px]">
-          <Btn href="https://booking.naver.com" icon={faArrowRight}>
+          <Btn href="https://m.place.naver.com/place/2067614711/home?entry=pll&bk_query=%ED%94%84%EB%A6%AC%EB%9E%A9" icon={faArrowRight}>
             투어 및 예약하러가기
           </Btn>
         </div>
@@ -168,8 +176,8 @@ export default function Space() {
 
       {/* 도면 */}
       <section className="px-6 xl:px-60 py-[200px] flex gap-[135px] items-center justify-center">
-        <div className="w-[900px] h-[400px] bg-[#f1f0ec] border border-black/10 rounded-2xl flex items-center justify-center shrink-0">
-          <p className="text-[54px] font-bold text-[#8e8e8e] text-center">COMING SOON</p>
+        <div className="w-[900px] shrink-0">
+          <img src="/img/space/tablemap.png" alt="도면" className="w-full" />
         </div>
         <div className="flex flex-col gap-5 shrink-0">
           {legends.map(({ color, label }) => (
@@ -188,23 +196,31 @@ export default function Space() {
           <p className="font-medium text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">오시는 길</p>
         </div>
 
-        {/* 지도 이미지 자리 */}
-        <div className="w-[904px] h-[575px] bg-[#d1e8c4] rounded-2xl overflow-hidden flex items-center justify-center">
-          <p className="text-[#4b4842]/40 text-2xl">지도 이미지를 넣어주세요</p>
-        </div>
+        <img src="/img/space/map.png" alt="오시는 길" className="w-[904px] rounded-2xl" />
 
         {/* 주소 */}
-        <div className="flex items-center gap-5">
+        <div
+          onClick={copyAddress}
+          className="flex items-center gap-5 cursor-pointer group relative"
+        >
           <FontAwesomeIcon icon={faLocationDot} className="text-[32px] text-dark-brown/80" />
-          <div className="text-[32px] font-medium text-dark-brown text-center tracking-[-0.64px] leading-normal">
+          <div className="text-[32px] font-medium text-dark-brown text-center tracking-[-0.64px] leading-normal relative">
             <p>서울 강서구 마곡중앙6로 66</p>
             <p>퀸즈파크텐 B동 3층 322-323호</p>
+            <span className={`absolute -top-9 left-1/2 -translate-x-1/2 text-sm font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all duration-200 pointer-events-none
+              ${copied
+                ? 'bg-dark-green text-cream opacity-100 translate-y-0'
+                : 'bg-dark-brown text-cream opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0'
+              }`}
+            >
+              {copied ? '복사 완료! ✓' : '복사할까요?'}
+            </span>
           </div>
         </div>
 
         {/* 지도 버튼 */}
         <div className="flex gap-14 w-[904px]">
-          <Btn href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EB%A7%88%EA%B3%A1%EC%A4%91%EC%95%996%EB%A1%9C%2066" icon={faArrowRight} className="flex-1">
+          <Btn href="https://map.naver.com/p/search/%ED%94%84%EB%A6%AC%EB%9E%A9/place/2067614711?c=15.00,0,0,0,dh&placePath=/home?bk_query=%ED%94%84%EB%A6%AC%EB%9E%A9&entry=bmp&from=map&fromPanelNum=2&timestamp=202606021104&locale=ko&svcName=map_pcv5&searchText=%ED%94%84%EB%A6%AC%EB%9E%A9" icon={faArrowRight} className="flex-1">
             네이버지도
           </Btn>
           <Btn href="https://map.kakao.com/link/search/%EC%84%9C%EC%9A%B8%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EB%A7%88%EA%B3%A1%EC%A4%91%EC%95%996%EB%A1%9C%2066" icon={faArrowRight} className="flex-1">

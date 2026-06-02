@@ -1,8 +1,23 @@
-const socialIcons = {
-  instagram: "https://www.figma.com/api/mcp/asset/4b6f86f5-900d-478b-bf79-5ac5fb581d6e",
-  threads: "https://www.figma.com/api/mcp/asset/afbc252a-4c76-4c9d-9b82-1706a663a131",
-  youtube: "https://www.figma.com/api/mcp/asset/c57b4959-d0c0-44ae-96fc-ac46d00c3d1e",
-}
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInstagram, faThreads, faYoutube } from '@fortawesome/free-brands-svg-icons'
+
+const socials = [
+  {
+    icon: faInstagram,
+    alt: "Instagram",
+    href: "https://www.instagram.com/freelab_solopreneur/",
+  },
+  {
+    icon: faThreads,
+    alt: "Threads",
+    href: "https://www.threads.com/@freelab_official?igshid=NTc4MTIwNjQ2YQ==",
+  },
+  {
+    icon: faYoutube,
+    alt: "YouTube",
+    href: "", // YouTube 주소 입력
+  },
+]
 
 const info = [
   [
@@ -42,9 +57,17 @@ export function Footer() {
           </div>
           <div className="flex flex-col gap-10 items-start">
             <div className="flex gap-11 items-center">
-              <img src={socialIcons.instagram} alt="Instagram" className="w-12 h-12" />
-              <img src={socialIcons.threads} alt="Threads" className="w-12 h-12" />
-              <img src={socialIcons.youtube} alt="YouTube" className="w-12 h-12" />
+              {socials.map(({ icon, alt, href }) =>
+                href ? (
+                  <a key={alt} href={href} target="_blank" rel="noreferrer" className="text-cream text-[48px] hover:opacity-70 transition-opacity">
+                    <FontAwesomeIcon icon={icon} />
+                  </a>
+                ) : (
+                  <span key={alt} className="text-cream/40 text-[48px]">
+                    <FontAwesomeIcon icon={icon} />
+                  </span>
+                )
+              )}
             </div>
             <p className="font-['Dela_Gothic_One'] text-cream/50 text-[40px] whitespace-nowrap leading-normal">
               come join us

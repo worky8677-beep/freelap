@@ -79,13 +79,13 @@ export default function Pricing() {
         <div className="grid grid-cols-2 gap-[30px] w-[1000px]">
 
           {/* 자유석 */}
-          <div className="border border-[#4b4842]/60 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center">
+          <div className="border border-[#4b4842]/20 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center">
             <p className="font-extrabold text-[45px] text-dark-green text-center">자유석</p>
             <PriceRow label="1일 권" unit="" price="15,000" highlight={false} />
           </div>
 
           {/* 프라이빗 전용석 — row span 2 */}
-          <div className="border border-[#4b4842]/60 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center row-span-2">
+          <div className="border border-[#4b4842]/20 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center row-span-2">
             <p className="font-extrabold text-[45px] text-dark-green text-center">프라이빗 전용석</p>
             <div className="flex flex-col gap-7 w-full">
               {dedicated.map(row => (
@@ -95,7 +95,7 @@ export default function Pricing() {
           </div>
 
           {/* 팟캐스트 스튜디오 */}
-          <div className="border border-[#4b4842]/60 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center">
+          <div className="border border-[#4b4842]/20 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center">
             <p className="font-extrabold text-[45px] text-dark-green text-center">팟캐스트 스튜디오</p>
             <div className="flex flex-col gap-7 w-full">
               <PriceRow label="1시간" unit="(1인)" price="60,000"  highlight={false} />
@@ -105,7 +105,7 @@ export default function Pricing() {
         </div>
 
         {/* 연계 혜택 표 */}
-        <div className="border border-[#4b4842]/60 rounded-[24px] p-[54px] w-[1000px]">
+        <div className="border border-[#4b4842]/20 rounded-[24px] p-[54px] w-[1000px]">
           <p className="font-extrabold text-[50px] text-dark-green text-center mb-9 tracking-[-1px]">전용석 + 스튜디오 연계 혜택</p>
           <table className="w-full">
             <thead>

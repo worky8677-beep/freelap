@@ -1,7 +1,34 @@
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faMicrophoneLines, faBriefcase, faArrowRight, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { Btn } from '../components/common/Btn'
+
+function Reveal({ children, from = 'left', className = '' }) {
+  const ref = useRef(null)
+  const [on, setOn] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setOn(true) },
+      { threshold: 0.12 }
+    )
+    if (el) obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  const start = from === 'left' ? '-translate-x-16' : 'translate-x-16'
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${on ? 'opacity-100 translate-x-0' : `opacity-0 ${start}`} ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
 
 const imgs = {
   hero:   "/img/space/work3.JPG",
@@ -116,6 +143,7 @@ export default function Home() {
 
       {/* About */}
       <section className="bg-white px-6 xl:px-60 py-24">
+        <Reveal from="left">
         <div className="max-w-[1440px] mx-auto flex gap-7 items-center justify-center">
           <div className="h-[375px] w-[600px] shrink-0 rounded-[18px] overflow-hidden relative">
             <img src={imgs.about} alt="프리랩 공간" className="absolute inset-0 w-full h-full object-cover" />
@@ -130,10 +158,12 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </Reveal>
       </section>
 
       {/* Who */}
       <section className="bg-cream px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+        <Reveal from="right" className="flex flex-col gap-10 items-center w-full">
         <div className="flex flex-col gap-3 items-center">
           <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px] whitespace-nowrap">for Who ?</p>
           <p className="font-bold text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">이런 사람을 찾아요</p>
@@ -141,10 +171,12 @@ export default function Home() {
         <div className="flex gap-3 w-full max-w-[1074px]">
           {whoCards.map(card => <WhoCard key={card.title} {...card} />)}
         </div>
+        </Reveal>
       </section>
 
       {/* Space */}
       <section className="bg-white px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+        <Reveal from="left" className="flex flex-col gap-10 items-center w-full">
         <div className="flex flex-col gap-3 items-center">
           <p className="font-black text-[64px] text-dark-green leading-[1.2] tracking-[6.4px]">Space</p>
           <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">당신이 몰입 할 수 있도록</p>
@@ -163,10 +195,12 @@ export default function Home() {
         <Btn to="/about" icon={faArrowRight}>
           공간소개
         </Btn>
+        </Reveal>
       </section>
 
       {/* Price */}
       <section className="bg-cream/50 px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+        <Reveal from="right" className="flex flex-col gap-10 items-center w-full">
         <div className="flex flex-col gap-3 items-center">
           <p className="font-black text-[64px] text-terracotta leading-[1.2] tracking-[6.4px]">Price</p>
           <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">작업스타일에 맞춰 선택하세요</p>
@@ -177,7 +211,7 @@ export default function Home() {
         </div>
         <div className="flex gap-10 items-start">
           {/* 자유석 */}
-          <div className="bg-white shadow-[2px_4px_10px_rgba(0,0,0,0.1)] rounded-3xl p-10 flex flex-col gap-12 w-[400px]">
+          <div className="bg-white shadow-[2px_4px_10px_rgba(0,0,0,0.1)] rounded-3xl p-10 flex flex-col gap-12 w-[400px] hover:-translate-y-2 transition-transform duration-300">
             <div>
               <p className="font-extrabold text-dark-green text-[48px] leading-normal">자유석</p>
               <div className="flex items-baseline gap-5 mt-2">
@@ -193,7 +227,7 @@ export default function Home() {
             </Link>
           </div>
           {/* 전용석 */}
-          <div className="bg-white border-2 border-dark-green shadow-[2px_4px_10px_rgba(27,85,19,0.31)] rounded-3xl p-10 flex flex-col gap-12 w-[400px]">
+          <div className="bg-white border-2 border-dark-green shadow-[2px_4px_10px_rgba(27,85,19,0.31)] rounded-3xl p-10 flex flex-col gap-12 w-[400px] hover:-translate-y-2 transition-transform duration-300">
             <div className="flex items-start justify-between">
               <div>
                 <p className="font-extrabold text-dark-green text-[48px] leading-normal">전용석</p>
@@ -212,10 +246,12 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        </Reveal>
       </section>
 
       {/* Story */}
       <section className="bg-white px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+        <Reveal from="left" className="flex flex-col gap-10 items-center w-full">
         <div className="flex flex-col gap-3 items-center">
           <p className="font-black text-[64px] text-dark-brown leading-[1.2] tracking-[6.4px]">Story</p>
           <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">프리랩이 전하는 이야기</p>
@@ -223,6 +259,7 @@ export default function Home() {
         <div className="flex gap-10 max-w-[1240px] w-full">
           {storyPosts.map((post, i) => <StoryCard key={i} {...post} />)}
         </div>
+        </Reveal>
       </section>
 
     </div>

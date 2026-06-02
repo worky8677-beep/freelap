@@ -13,3 +13,47 @@ body {
   color: var(--color-dark-brown);
   margin: 0;
 }
+
+.nav-highlight {
+  position: relative;
+  background-image: linear-gradient(to right, #DBCB8A 50%, #F1F0EC 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.4s ease;
+}
+
+.nav-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 24px;
+  width: 0;
+  height: 1.5px;
+  background-color: #DBCB8A;
+  transition: width 0.4s ease;
+}
+
+.nav-highlight:hover {
+  background-position: 0% 0;
+}
+
+.nav-highlight:hover::after {
+  width: calc(100% - 48px);
+}
+
+.nav-active {
+  position: relative;
+}
+
+.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 24px;
+  width: calc(100% - 48px);
+  height: 1.5px;
+  background-color: #DBCB8A;
+}

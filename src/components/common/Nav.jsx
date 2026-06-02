@@ -19,7 +19,9 @@ export function Nav() {
           <NavLink
             key={label}
             to={to}
-            className="px-6 py-3 text-cream text-xl font-semibold hover:opacity-70 transition-opacity whitespace-nowrap"
+            className={({ isActive }) =>
+              `px-6 py-3 text-xl font-semibold whitespace-nowrap ${isActive ? 'text-[#DBCB8A] nav-active' : 'nav-highlight'}`
+            }
           >
             {label}
           </NavLink>

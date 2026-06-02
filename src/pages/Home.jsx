@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faMicrophoneLines, faBriefcase, faArrowRight, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { Btn } from '../components/common/Btn'
+import { Hero } from '../components/Hero'
 
 function Reveal({ children, from = 'left', className = '' }) {
   const ref = useRef(null)
@@ -31,7 +32,6 @@ function Reveal({ children, from = 'left', className = '' }) {
 }
 
 const imgs = {
-  hero:   "/img/space/work3.JPG",
   about:  "/img/space/work1.png",
   space1: "/img/space/work3.JPG",
   space2: "/img/space/work1.png",
@@ -71,11 +71,13 @@ const dedicatedFeatures = [
   '집 이외에 나만의 작업실이 한 곳 더.',
 ]
 
-const storyPosts = [
-  { img: imgs.space4, caption: '자유롭게 일하고 싶은 모든 분들을 위한 공간, 프리랩입니다 🌱', likes: 142 },
-  { img: imgs.space3, caption: '오늘도 각자의 작업에 집중하는 프리랩 멤버들 🌿', likes: 98 },
-  { img: imgs.space2, caption: '당신의 작업 공간이 될 수 있어요. 프리랩에서 함께해요 ✨', likes: 115 },
+const fallbackPosts = [
+  { img: imgs.space4, caption: '자유롭게 일하고 싶은 모든 분들을 위한 공간, 프리랩입니다 🌱' },
+  { img: imgs.space3, caption: '오늘도 각자의 작업에 집중하는 프리랩 멤버들 🌿' },
+  { img: imgs.space2, caption: '당신의 작업 공간이 될 수 있어요. 프리랩에서 함께해요 ✨' },
 ]
+
+const INSTAGRAM_API = `https://graph.facebook.com/v25.0/17841443289677059/media?fields=id,media_type,media_url,caption,timestamp&limit=6&access_token=${import.meta.env.VITE_INSTAGRAM_TOKEN}`
 
 function PriceSection() {
   const [hoverFree, setHoverFree] = useState(false)
@@ -197,9 +199,14 @@ function WhoCard({ icon, title, desc }) {
   )
 }
 
-function StoryCard({ img, caption, likes }) {
+function StoryCard({ img, caption }) {
   return (
-    <div className="bg-white border border-[#dbdbdb] rounded-xl overflow-hidden flex-1 min-w-0">
+    <a
+      href="https://www.instagram.com/freelab_solopreneur/"
+      target="_blank"
+      rel="noreferrer"
+      className="bg-white border border-[#dbdbdb] rounded-xl overflow-hidden flex-1 min-w-0 block hover:shadow-md transition-shadow duration-300"
+    >
       <div className="flex items-center gap-3 px-4 py-3">
         <div className="w-7 h-7 rounded-full bg-dark-green shrink-0" />
         <span className="text-[#262626] text-xs">freelab_official</span>
@@ -209,12 +216,64 @@ function StoryCard({ img, caption, likes }) {
         <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover" />
       </div>
       <div className="px-4 py-3">
-        <p className="text-xs text-[#262626] font-semibold">좋아요 {likes}개</p>
-        <p className="text-xs text-[#262626] mt-1">
-          <span className="font-semibold">freelab_official</span> {caption}
+        <p className="text-base text-[#262626] mt-1 leading-snug line-clamp-3">
+          <span className="font-semibold">freelab_official</span>{caption ? ` ${caption}` : ''}
         </p>
-        <p className="text-xs text-[#8e8e8e] mt-1">댓글 보기</p>
-        <p className="text-[10px] text-[#8e8e8e] uppercase mt-1">2일 전</p>
+        <p className="text-sm text-[#8e8e8e] mt-1">댓글 보기</p>
+      </div>
+    </a>
+  )
+}
+
+function StorySection() {
+  const [posts, setPosts] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(INSTAGRAM_API)
+      .then(r => r.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error.message)
+        const images = (data.data || [])
+          .filter(p => p.media_type === 'IMAGE')
+          .slice(0, 3)
+          .map(p => ({ img: p.media_url, caption: p.caption || '' }))
+        setPosts(images.length > 0 ? images : fallbackPosts)
+      })
+      .catch(() => setPosts(fallbackPosts))
+      .finally(() => setLoading(false))
+  }, [])
+
+  return (
+    <section className="bg-white px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+      <Reveal from="left" className="flex flex-col gap-10 items-center w-full">
+        <div className="flex flex-col gap-3 items-center">
+          <p className="font-black text-[64px] text-dark-brown leading-[1.2] tracking-[6.4px]">Story</p>
+          <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">프리랩이 전하는 이야기</p>
+        </div>
+        <div className="flex gap-10 max-w-[1240px] w-full">
+          {loading
+            ? [0, 1, 2].map(i => <StoryCardSkeleton key={i} />)
+            : posts.map((post, i) => <StoryCard key={i} {...post} />)
+          }
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
+function StoryCardSkeleton() {
+  return (
+    <div className="bg-white border border-[#dbdbdb] rounded-xl overflow-hidden flex-1 min-w-0 animate-pulse">
+      <div className="flex items-center gap-3 px-4 py-3">
+        <div className="w-7 h-7 rounded-full bg-dark-brown/10 shrink-0" />
+        <div className="h-3 w-24 bg-dark-brown/10 rounded" />
+      </div>
+      <div className="h-[400px] bg-dark-brown/10" />
+      <div className="px-4 py-3 flex flex-col gap-2">
+        <div className="h-4 w-full bg-dark-brown/10 rounded" />
+        <div className="h-4 w-full bg-dark-brown/10 rounded" />
+        <div className="h-4 w-2/3 bg-dark-brown/10 rounded" />
       </div>
     </div>
   )
@@ -224,21 +283,7 @@ export default function Home() {
   return (
     <div className="bg-white">
 
-      {/* Hero */}
-      <section className="relative h-[950px] flex items-center justify-center overflow-hidden">
-        <img src={imgs.hero} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative text-cream text-center flex flex-col gap-10 items-center">
-          <div className="font-bold text-[64px] leading-[1.2] tracking-[6.4px] whitespace-nowrap">
-            <p>단단하게 혼자</p>
-            <p>따뜻하게 함께</p>
-          </div>
-          <div className="font-semibold text-[40px] leading-none tracking-[-0.8px] whitespace-nowrap">
-            <p>발산역과 마곡역 사이, 도보 5분 거리</p>
-            <p>크리에이터를 위한 공유 작업실</p>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       {/* About */}
       <section className="bg-white px-6 xl:px-60 py-24">
@@ -291,17 +336,7 @@ export default function Home() {
       <PriceSection />
 
       {/* Story */}
-      <section className="bg-white px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
-        <Reveal from="left" className="flex flex-col gap-10 items-center w-full">
-        <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-dark-brown leading-[1.2] tracking-[6.4px]">Story</p>
-          <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">프리랩이 전하는 이야기</p>
-        </div>
-        <div className="flex gap-10 max-w-[1240px] w-full">
-          {storyPosts.map((post, i) => <StoryCard key={i} {...post} />)}
-        </div>
-        </Reveal>
-      </section>
+      <StorySection />
 
     </div>
   )

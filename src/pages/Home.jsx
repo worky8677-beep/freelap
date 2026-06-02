@@ -77,6 +77,74 @@ const storyPosts = [
   { img: imgs.space2, caption: '당신의 작업 공간이 될 수 있어요. 프리랩에서 함께해요 ✨', likes: 115 },
 ]
 
+function PriceSection() {
+  const [hoverFree, setHoverFree] = useState(false)
+
+  const freeSelected   = hoverFree
+  const dedicatedSelected = !hoverFree
+
+  const selectedCls = 'border-2 border-dark-green shadow-[2px_4px_10px_rgba(27,85,19,0.31)]'
+  const plainCls    = 'border-2 border-transparent shadow-[2px_4px_10px_rgba(0,0,0,0.1)]'
+
+  return (
+    <section className="bg-cream/50 px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+      <Reveal from="right" className="flex flex-col gap-10 items-center w-full">
+        <div className="flex flex-col gap-3 items-center">
+          <p className="font-black text-[64px] text-terracotta leading-[1.2] tracking-[6.4px]">Price</p>
+          <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">작업스타일에 맞춰 선택하세요</p>
+        </div>
+        <div className="text-dark-brown/80 text-2xl font-medium text-center leading-[1.2] tracking-[2.4px]">
+          <p>프리랩은 독서실처럼 정적인 공간이 아닙니다.</p>
+          <p>간단한 인사와 작업의 소리들이 백색소음처럼 편안한 공간이 되길 바랍니다</p>
+        </div>
+        <div className="flex gap-10 items-start">
+          {/* 자유석 */}
+          <div
+            onMouseEnter={() => setHoverFree(true)}
+            className={`bg-white rounded-3xl p-10 flex flex-col gap-12 w-[400px] transition-all duration-500 cursor-pointer ${freeSelected ? selectedCls : plainCls}`}
+          >
+            <div>
+              <p className="font-extrabold text-dark-green text-[48px] leading-normal">자유석</p>
+              <div className="flex items-baseline gap-5 mt-2">
+                <p className="font-bold text-dark-brown text-[32px]">15,000~</p>
+                <p className="font-medium text-dark-brown/20 text-2xl tracking-[-1.44px]">/ 1일</p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
+              {freeFeatures.map(f => <FeatureItem key={f} text={f} />)}
+            </div>
+            <Link to="/pricing" className={`font-medium text-xl text-center py-3 rounded-2xl hover:opacity-90 transition-all duration-500 ${freeSelected ? 'bg-dark-green text-cream' : 'bg-[rgba(165,161,153,0.5)] text-dark-brown/80'}`}>
+              more details
+            </Link>
+          </div>
+          {/* 전용석 */}
+          <div
+            onMouseEnter={() => setHoverFree(false)}
+            className={`bg-white rounded-3xl p-10 flex flex-col gap-12 w-[400px] transition-all duration-500 cursor-pointer ${dedicatedSelected ? selectedCls : plainCls}`}
+          >
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="font-extrabold text-dark-green text-[48px] leading-normal">전용석</p>
+                <div className="flex items-baseline gap-5 mt-2">
+                  <p className="font-bold text-dark-brown text-[32px]">330,000~</p>
+                  <p className="font-medium text-dark-brown/20 text-2xl tracking-[-1.44px]">/ 1개월</p>
+                </div>
+              </div>
+              <FontAwesomeIcon icon={faHeart} className="text-terracotta text-[40px] mt-2" />
+            </div>
+            <div className="flex flex-col gap-3">
+              {dedicatedFeatures.map(f => <FeatureItem key={f} text={f} />)}
+            </div>
+            <Link to="/pricing" className={`font-medium text-xl text-center py-3 rounded-2xl hover:opacity-90 transition-all duration-500 ${dedicatedSelected ? 'bg-dark-green text-cream' : 'bg-[rgba(165,161,153,0.5)] text-dark-brown/80'}`}>
+              more details
+            </Link>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
 function FeatureItem({ text }) {
   return (
     <div className="flex items-center gap-2">
@@ -86,10 +154,41 @@ function FeatureItem({ text }) {
   )
 }
 
+function WhoSection() {
+  const cardsRef = useRef(null)
+  const [active, setActive] = useState(false)
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setActive(true) },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    )
+    if (cardsRef.current) obs.observe(cardsRef.current)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <section className={`bg-cream px-6 xl:px-60 py-24 flex flex-col gap-10 items-center ${active ? 'icons-active' : ''}`}>
+      <Reveal from="right" className="flex flex-col gap-10 items-center w-full">
+        <div className="flex flex-col gap-3 items-center">
+          <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px] whitespace-nowrap">for Who ?</p>
+          <p className="font-bold text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">이런 사람을 찾아요</p>
+        </div>
+        <div ref={cardsRef} className="flex gap-3 w-full max-w-[1074px]">
+          {whoCards.map(card => <WhoCard key={card.title} {...card} />)}
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
 function WhoCard({ icon, title, desc }) {
   return (
     <div className="bg-white flex flex-col items-center justify-between rounded-[27px] px-7 py-10 h-[204px] flex-1">
-      <FontAwesomeIcon icon={icon} className="text-terracotta text-[40px]" />
+      <div className="icon-fill relative w-10 h-10 flex items-center justify-center">
+        <FontAwesomeIcon icon={icon} className="text-dark-brown/20 text-[40px]" />
+        <FontAwesomeIcon icon={icon} className="icon-overlay text-[40px]" />
+      </div>
       <p className="font-extrabold text-xl text-dark-brown/80 text-center">{title}</p>
       <div className="text-dark-brown/80 text-base font-medium text-center leading-snug">
         {desc.map((line, i) => <p key={i}>{line}</p>)}
@@ -162,17 +261,7 @@ export default function Home() {
       </section>
 
       {/* Who */}
-      <section className="bg-cream px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
-        <Reveal from="right" className="flex flex-col gap-10 items-center w-full">
-        <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px] whitespace-nowrap">for Who ?</p>
-          <p className="font-bold text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">이런 사람을 찾아요</p>
-        </div>
-        <div className="flex gap-3 w-full max-w-[1074px]">
-          {whoCards.map(card => <WhoCard key={card.title} {...card} />)}
-        </div>
-        </Reveal>
-      </section>
+      <WhoSection />
 
       {/* Space */}
       <section className="bg-white px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
@@ -199,55 +288,7 @@ export default function Home() {
       </section>
 
       {/* Price */}
-      <section className="bg-cream/50 px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
-        <Reveal from="right" className="flex flex-col gap-10 items-center w-full">
-        <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-terracotta leading-[1.2] tracking-[6.4px]">Price</p>
-          <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">작업스타일에 맞춰 선택하세요</p>
-        </div>
-        <div className="text-dark-brown/80 text-2xl font-medium text-center leading-[1.2] tracking-[2.4px]">
-          <p>프리랩은 독서실처럼 정적인 공간이 아닙니다.</p>
-          <p>간단한 인사와 작업의 소리들이 백색소음처럼 편안한 공간이 되길 바랍니다</p>
-        </div>
-        <div className="flex gap-10 items-start">
-          {/* 자유석 */}
-          <div className="bg-white shadow-[2px_4px_10px_rgba(0,0,0,0.1)] rounded-3xl p-10 flex flex-col gap-12 w-[400px] hover:-translate-y-2 transition-transform duration-300">
-            <div>
-              <p className="font-extrabold text-dark-green text-[48px] leading-normal">자유석</p>
-              <div className="flex items-baseline gap-5 mt-2">
-                <p className="font-bold text-dark-brown text-[32px]">15,000~</p>
-                <p className="font-medium text-dark-brown/20 text-2xl tracking-[-1.44px]">/ 1일</p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3">
-              {freeFeatures.map(f => <FeatureItem key={f} text={f} />)}
-            </div>
-            <Link to="/pricing" className="bg-[rgba(165,161,153,0.5)] text-dark-brown/80 font-medium text-xl text-center py-3 rounded-2xl hover:opacity-90 transition-opacity">
-              more details
-            </Link>
-          </div>
-          {/* 전용석 */}
-          <div className="bg-white border-2 border-dark-green shadow-[2px_4px_10px_rgba(27,85,19,0.31)] rounded-3xl p-10 flex flex-col gap-12 w-[400px] hover:-translate-y-2 transition-transform duration-300">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="font-extrabold text-dark-green text-[48px] leading-normal">전용석</p>
-                <div className="flex items-baseline gap-5 mt-2">
-                  <p className="font-bold text-dark-brown text-[32px]">330,000~</p>
-                  <p className="font-medium text-dark-brown/20 text-2xl tracking-[-1.44px]">/ 1개월</p>
-                </div>
-              </div>
-              <FontAwesomeIcon icon={faHeart} className="text-terracotta text-[40px] mt-2" />
-            </div>
-            <div className="flex flex-col gap-3">
-              {dedicatedFeatures.map(f => <FeatureItem key={f} text={f} />)}
-            </div>
-            <Link to="/pricing" className="bg-dark-green text-cream font-medium text-xl text-center py-3 rounded-2xl hover:opacity-90 transition-opacity">
-              more details
-            </Link>
-          </div>
-        </div>
-        </Reveal>
-      </section>
+      <PriceSection />
 
       {/* Story */}
       <section className="bg-white px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">

@@ -141,15 +141,15 @@ export default function Pricing() {
           <p className="font-medium text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">환불규정</p>
         </div>
 
-        <div className="bg-white border border-[#e0e0e0] rounded-lg overflow-hidden w-[800px]">
-          <table className="w-full text-sm text-[#262626]">
+        <div className="border border-[#4b4842]/20 rounded-[22px] overflow-hidden w-[1000px]">
+          <table className="w-full text-[#262626]">
             <tbody>
               {refunds.map(({ cond, desc, note }, i) => (
-                <tr key={i} className={i < refunds.length - 1 ? 'border-b border-[#e0e0e0]' : ''}>
-                  <td className="px-6 py-5 align-top w-[210px] whitespace-pre-line font-medium">{cond}</td>
-                  <td className="px-6 py-5 align-top">
-                    <p>{desc}</p>
-                    {note && <p className="text-[#69665f] mt-1">{note}</p>}
+                <tr key={i} className={i < refunds.length - 1 ? 'border-b border-[#4b4842]/10' : ''}>
+                  <td className="px-8 py-6 align-top w-[240px] whitespace-pre-line font-semibold text-base text-dark-brown">{cond}</td>
+                  <td className="px-8 py-6 align-top text-base">
+                    <p className="text-dark-brown">{desc}</p>
+                    {note && <p className="text-dark-brown/50 mt-1 text-sm">{note}</p>}
                   </td>
                 </tr>
               ))}

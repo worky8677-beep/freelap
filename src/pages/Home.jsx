@@ -230,17 +230,27 @@ function StorySection() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const token = import.meta.env.VITE_INSTAGRAM_TOKEN
+    if (!token) {
+      console.warn('[Story] VITE_INSTAGRAM_TOKEN 환경변수가 없습니다.')
+      setPosts(fallbackPosts)
+      setLoading(false)
+      return
+    }
     fetch(INSTAGRAM_API)
       .then(r => r.json())
       .then(data => {
-        if (data.error) throw new Error(data.error.message)
+        if (data.error) throw new Error(`Instagram API 오류: ${data.error.message} (code ${data.error.code})`)
         const images = (data.data || [])
           .filter(p => p.media_type === 'IMAGE' || p.media_type === 'CAROUSEL_ALBUM')
           .slice(0, 3)
           .map(p => ({ img: p.media_url, caption: p.caption || '' }))
         setPosts(images.length > 0 ? images : fallbackPosts)
       })
-      .catch(() => setPosts(fallbackPosts))
+      .catch(err => {
+        console.error('[Story] Instagram fetch 실패:', err.message)
+        setPosts(fallbackPosts)
+      })
       .finally(() => setLoading(false))
   }, [])
 

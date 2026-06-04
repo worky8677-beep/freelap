@@ -47,12 +47,11 @@ function Reveal({ children, from = 'left', className = '' }) {
 function DescItem({ text }) {
   return (
     <div className="flex gap-3 items-start w-full">
-      <div className="mt-[7px] w-[10px] h-[20px] bg-terracotta/70 rounded-full shrink-0" />
-      <p className="text-2xl text-[#4b4842] leading-normal tracking-[-0.48px]">{text}</p>
+      <div className="mt-[5px] sm:mt-[7px] w-2 sm:w-[10px] h-4 sm:h-[20px] bg-terracotta/70 rounded-full shrink-0" />
+      <p className="text-sm sm:text-base lg:text-2xl text-[#4b4842] leading-normal tracking-[-0.48px]">{text}</p>
     </div>
   )
 }
-
 
 export default function Space() {
   const [copied, setCopied] = useState(false)
@@ -66,17 +65,15 @@ export default function Space() {
   return (
     <div className="bg-white">
 
-      {/* WORK SPACE 헤더 + 공간 섹션 */}
-      <section className="px-6 xl:px-60 py-[100px] flex flex-col items-center">
+      {/* WORK SPACE */}
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col items-center">
 
-        {/* 타이틀 */}
-        <div className="flex flex-col gap-3 items-center pb-[100px]">
-          <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px] whitespace-nowrap">WORK SPACE</p>
-          <p className="font-medium text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">프리랩의 공간을 소개합니다</p>
+        <div className="flex flex-col gap-3 items-center pb-12 sm:pb-16 lg:pb-[100px]">
+          <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px] whitespace-nowrap">WORK SPACE</p>
+          <p className="font-medium text-lg sm:text-xl lg:text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">프리랩의 공간을 소개합니다</p>
         </div>
 
-        {/* 공간 3개 */}
-        <div className="flex flex-col gap-[100px] w-full">
+        <div className="flex flex-col gap-12 sm:gap-16 lg:gap-[100px] w-full">
           {spaces.map((s, i) => (
             <Reveal key={s.title} from={i % 2 === 0 ? 'left' : 'right'}>
               <SpaceCard {...s} />
@@ -84,21 +81,20 @@ export default function Space() {
           ))}
         </div>
 
-        {/* 투어 예약 버튼 */}
-        <div className="mt-[100px]">
+        <div className="mt-12 sm:mt-16 lg:mt-[100px]">
           <Btn href="https://m.place.naver.com/place/2067614711/home?entry=pll&bk_query=%ED%94%84%EB%A6%AC%EB%9E%A9" icon={faArrowRight}>
             투어 및 예약하러가기
           </Btn>
         </div>
 
         {/* 편의시설 */}
-        <div className="mt-[100px] w-full">
-          <div className="bg-cream grid grid-cols-3 gap-x-[88px] gap-y-[93px] p-[100px] rounded-3xl w-full">
+        <div className="mt-12 sm:mt-16 lg:mt-[100px] w-full">
+          <div className="bg-cream grid grid-cols-1 sm:grid-cols-3 gap-y-10 gap-x-10 lg:gap-x-[88px] lg:gap-y-[93px] p-8 sm:p-12 lg:p-[100px] rounded-3xl w-full">
             {amenities.map(({ icon, title, sub }) => (
-              <div key={title} className="flex flex-col items-center gap-6">
-                <FontAwesomeIcon icon={icon} className="text-[96px] text-[#183153]" />
-                <p className="font-semibold text-[40px] text-dark-brown text-center tracking-[-0.8px] leading-normal">{title}</p>
-                <p className="font-semibold text-2xl text-dark-brown text-center tracking-[-0.48px]">{sub}</p>
+              <div key={title} className="flex flex-col items-center gap-4 lg:gap-6">
+                <FontAwesomeIcon icon={icon} className="text-[56px] sm:text-[72px] lg:text-[96px] text-[#183153]" />
+                <p className="font-semibold text-2xl sm:text-[28px] lg:text-[40px] text-dark-brown text-center tracking-[-0.8px] leading-normal">{title}</p>
+                <p className="font-semibold text-base sm:text-lg lg:text-2xl text-dark-brown text-center tracking-[-0.48px]">{sub}</p>
               </div>
             ))}
           </div>
@@ -107,36 +103,35 @@ export default function Space() {
       </section>
 
       {/* 도면 */}
-      <section className="px-6 xl:px-60 py-[200px] flex gap-[135px] items-center justify-center">
-        <div className="w-[900px] shrink-0">
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[200px] flex flex-col lg:flex-row gap-10 lg:gap-[135px] items-center justify-center">
+        <div className="w-full lg:w-[900px] lg:shrink-0">
           <img src="/img/space/tablemap.png" alt="도면" className="w-full" />
         </div>
-        <div className="flex flex-col gap-5 shrink-0">
+        <div className="flex flex-col gap-4 lg:gap-5 w-full lg:w-auto">
           {legends.map(({ color, label }) => (
-            <div key={label} className="flex gap-5 items-center">
-              <div className="w-[50px] h-[50px] rounded-full border border-[#bababa] shrink-0" style={{ backgroundColor: color }} />
-              <p className="font-bold text-[40px] text-[#4b4842] tracking-[-0.8px] leading-normal">{label}</p>
+            <div key={label} className="flex gap-4 lg:gap-5 items-center">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-[50px] lg:h-[50px] rounded-full border border-[#bababa] shrink-0" style={{ backgroundColor: color }} />
+              <p className="font-bold text-xl sm:text-2xl lg:text-[40px] text-[#4b4842] tracking-[-0.8px] leading-normal">{label}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* MAP */}
-      <section className="px-6 xl:px-60 py-[100px] flex flex-col items-center gap-14">
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col items-center gap-8 lg:gap-14">
         <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">MAP</p>
-          <p className="font-medium text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">오시는 길</p>
+          <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">MAP</p>
+          <p className="font-medium text-lg sm:text-xl lg:text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">오시는 길</p>
         </div>
 
-        <img src="/img/space/map.png" alt="오시는 길" className="w-[904px] rounded-2xl" />
+        <img src="/img/space/map.png" alt="오시는 길" className="w-full lg:w-[904px] rounded-2xl" />
 
-        {/* 주소 */}
         <div
           onClick={copyAddress}
-          className="flex items-center gap-5 cursor-pointer group relative"
+          className="flex items-center gap-3 lg:gap-5 cursor-pointer group relative"
         >
-          <FontAwesomeIcon icon={faLocationDot} className="text-[32px] text-dark-brown/80" />
-          <div className="text-[32px] font-medium text-dark-brown text-center tracking-[-0.64px] leading-normal relative">
+          <FontAwesomeIcon icon={faLocationDot} className="text-xl sm:text-2xl lg:text-[32px] text-dark-brown/80 shrink-0" />
+          <div className="text-base sm:text-xl lg:text-[32px] font-medium text-dark-brown text-center tracking-[-0.64px] leading-normal relative">
             <p>서울 강서구 마곡중앙6로 66</p>
             <p>퀸즈파크텐 B동 3층 322-323호</p>
             <span className={`absolute -top-9 left-1/2 -translate-x-1/2 text-sm font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all duration-200 pointer-events-none
@@ -150,8 +145,7 @@ export default function Space() {
           </div>
         </div>
 
-        {/* 지도 버튼 */}
-        <div className="flex gap-14 w-[904px]">
+        <div className="flex gap-5 sm:gap-8 lg:gap-14 w-full lg:w-[904px]">
           <Btn href="https://map.naver.com/p/search/%ED%94%84%EB%A6%AC%EB%9E%A9/place/2067614711?c=15.00,0,0,0,dh&placePath=/home?bk_query=%ED%94%84%EB%A6%AC%EB%9E%A9&entry=bmp&from=map&fromPanelNum=2&timestamp=202606021104&locale=ko&svcName=map_pcv5&searchText=%ED%94%84%EB%A6%AC%EB%9E%A9" icon={faArrowRight} className="flex-1">
             네이버지도
           </Btn>
@@ -162,7 +156,7 @@ export default function Space() {
       </section>
 
       {/* 주의사항 */}
-      <section className="px-6 xl:px-60 py-[100px] flex flex-col gap-3">
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col gap-3">
         {notices.map((n, i) => <DescItem key={i} text={n} />)}
       </section>
 

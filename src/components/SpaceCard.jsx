@@ -38,21 +38,21 @@ function Carousel({ imgs, alt }) {
   const next = () => setIdx(i => (i + 1) % imgs.length)
 
   return (
-    <div className="w-[600px] h-[375px] rounded-[18px] overflow-hidden relative shrink-0 group">
+    <div className="w-full lg:w-[600px] h-[220px] sm:h-[300px] lg:h-[375px] rounded-[18px] overflow-hidden relative lg:shrink-0 group">
       <div
         className="flex h-full transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${idx * 100}%)` }}
       >
         {imgs.map((src, i) => (
-          <img key={i} src={src} alt={alt} className="w-[600px] h-full object-cover shrink-0" />
+          <img key={i} src={src} alt={alt} className="w-full h-full object-cover shrink-0" style={{ minWidth: '100%' }} />
         ))}
       </div>
       {imgs.length > 1 && (
         <>
-          <button onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 text-white w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/50">
+          <button onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 text-white w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity hover:bg-black/50">
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
-          <button onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 text-white w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/50">
+          <button onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 text-white w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity hover:bg-black/50">
             <FontAwesomeIcon icon={faChevronRight} />
           </button>
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
@@ -68,17 +68,17 @@ function Carousel({ imgs, alt }) {
 
 export function SpaceCard({ imgs, title, descs }) {
   return (
-    <div className="flex gap-[100px] items-start w-full">
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-[100px] items-start w-full">
       <Carousel imgs={imgs} alt={title} />
-      <div className="flex flex-col gap-8 w-[740px]">
-        <div className="py-5">
-          <p className="font-bold text-[40px] text-[#4b4842] tracking-[-0.8px] leading-normal">{title}</p>
+      <div className="flex flex-col gap-5 lg:gap-8 w-full lg:w-[740px]">
+        <div className="py-2 lg:py-5">
+          <p className="font-bold text-[28px] sm:text-[32px] lg:text-[40px] text-[#4b4842] tracking-[-0.8px] leading-normal">{title}</p>
         </div>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-3 lg:gap-5">
           {descs.map((d, i) => (
             <div key={i} className="flex gap-3 items-start w-full">
-              <div className="mt-[7px] w-[10px] h-[20px] bg-terracotta/70 rounded-full shrink-0" />
-              <p className="text-2xl text-[#4b4842] leading-normal tracking-[-0.48px]">{d}</p>
+              <div className="mt-[5px] sm:mt-[7px] w-2 sm:w-[10px] h-4 sm:h-[20px] bg-terracotta/70 rounded-full shrink-0" />
+              <p className="text-sm sm:text-base lg:text-2xl text-[#4b4842] leading-normal tracking-[-0.48px]">{d}</p>
             </div>
           ))}
         </div>

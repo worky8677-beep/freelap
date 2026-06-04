@@ -82,34 +82,34 @@ const INSTAGRAM_API = `https://graph.facebook.com/v25.0/17841443289677059/media?
 function PriceSection() {
   const [hoverFree, setHoverFree] = useState(false)
 
-  const freeSelected   = hoverFree
+  const freeSelected      = hoverFree
   const dedicatedSelected = !hoverFree
 
   const selectedCls = 'border-2 border-dark-green shadow-[2px_4px_10px_rgba(27,85,19,0.31)]'
   const plainCls    = 'border-2 border-transparent shadow-[2px_4px_10px_rgba(0,0,0,0.1)]'
 
   return (
-    <section className="bg-cream/50 px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+    <section className="bg-cream/50 px-6 sm:px-10 lg:px-20 xl:px-60 py-16 lg:py-24 flex flex-col gap-10 items-center">
       <Reveal from="right" className="flex flex-col gap-10 items-center w-full">
         <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-terracotta leading-[1.2] tracking-[6.4px]">Price</p>
-          <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">작업스타일에 맞춰 선택하세요</p>
+          <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-terracotta leading-[1.2] tracking-[6.4px]">Price</p>
+          <p className="font-bold text-lg sm:text-xl lg:text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">작업스타일에 맞춰 선택하세요</p>
         </div>
-        <div className="text-dark-brown/80 text-2xl font-medium text-center leading-[1.2] tracking-[2.4px]">
+        <div className="text-dark-brown/80 text-base sm:text-lg lg:text-2xl font-medium text-center leading-[1.2] tracking-[2.4px]">
           <p>프리랩은 독서실처럼 정적인 공간이 아닙니다.</p>
           <p>간단한 인사와 작업의 소리들이 백색소음처럼 편안한 공간이 되길 바랍니다</p>
         </div>
-        <div className="flex gap-10 items-start">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 w-full max-w-[900px]">
           {/* 자유석 */}
           <div
             onMouseEnter={() => setHoverFree(true)}
-            className={`bg-white rounded-3xl p-10 flex flex-col gap-12 w-[400px] transition-all duration-500 cursor-pointer ${freeSelected ? selectedCls : plainCls}`}
+            className={`bg-white rounded-3xl p-6 lg:p-10 flex flex-col gap-8 lg:gap-12 flex-1 transition-all duration-500 cursor-pointer ${freeSelected ? selectedCls : plainCls}`}
           >
             <div>
-              <p className="font-extrabold text-dark-green text-[48px] leading-normal">자유석</p>
+              <p className="font-extrabold text-dark-green text-[36px] lg:text-[48px] leading-normal">자유석</p>
               <div className="flex items-baseline gap-5 mt-2">
-                <p className="font-bold text-dark-brown text-[32px]">15,000~</p>
-                <p className="font-medium text-dark-brown/20 text-2xl tracking-[-1.44px]">/ 1일</p>
+                <p className="font-bold text-dark-brown text-2xl lg:text-[32px]">15,000~</p>
+                <p className="font-medium text-dark-brown/20 text-lg lg:text-2xl tracking-[-1.44px]">/ 1일</p>
               </div>
             </div>
             <div className="flex flex-col gap-3">
@@ -122,14 +122,14 @@ function PriceSection() {
           {/* 전용석 */}
           <div
             onMouseEnter={() => setHoverFree(false)}
-            className={`bg-white rounded-3xl p-10 flex flex-col gap-12 w-[400px] transition-all duration-500 cursor-pointer ${dedicatedSelected ? selectedCls : plainCls}`}
+            className={`bg-white rounded-3xl p-6 lg:p-10 flex flex-col gap-8 lg:gap-12 flex-1 transition-all duration-500 cursor-pointer ${dedicatedSelected ? selectedCls : plainCls}`}
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="font-extrabold text-dark-green text-[48px] leading-normal">전용석</p>
+                <p className="font-extrabold text-dark-green text-[36px] lg:text-[48px] leading-normal">전용석</p>
                 <div className="flex items-baseline gap-5 mt-2">
-                  <p className="font-bold text-dark-brown text-[32px]">330,000~</p>
-                  <p className="font-medium text-dark-brown/20 text-2xl tracking-[-1.44px]">/ 1개월</p>
+                  <p className="font-bold text-dark-brown text-2xl lg:text-[32px]">330,000~</p>
+                  <p className="font-medium text-dark-brown/20 text-lg lg:text-2xl tracking-[-1.44px]">/ 1개월</p>
                 </div>
               </div>
               <FontAwesomeIcon icon={faHeart} className="text-terracotta text-[40px] mt-2" />
@@ -151,7 +151,7 @@ function FeatureItem({ text }) {
   return (
     <div className="flex items-center gap-2">
       <div className="w-2 h-[14px] bg-dark-green/50 rounded-full shrink-0" />
-      <p className="font-medium text-xl text-dark-brown/80 tracking-[-1.2px]">{text}</p>
+      <p className="font-medium text-base lg:text-xl text-dark-brown/80 tracking-[-1.2px]">{text}</p>
     </div>
   )
 }
@@ -170,13 +170,13 @@ function WhoSection() {
   }, [])
 
   return (
-    <section className={`bg-cream px-6 xl:px-60 py-24 flex flex-col gap-10 items-center ${active ? 'icons-active' : ''}`}>
+    <section className={`bg-cream px-6 sm:px-10 lg:px-20 xl:px-60 py-16 lg:py-24 flex flex-col gap-10 items-center ${active ? 'icons-active' : ''}`}>
       <Reveal from="right" className="flex flex-col gap-10 items-center w-full">
         <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px] whitespace-nowrap">for Who ?</p>
-          <p className="font-bold text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">이런 사람을 찾아요</p>
+          <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px] whitespace-nowrap">for Who ?</p>
+          <p className="font-bold text-lg sm:text-xl lg:text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">이런 사람을 찾아요</p>
         </div>
-        <div ref={cardsRef} className="flex gap-3 w-full max-w-[1074px]">
+        <div ref={cardsRef} className="flex flex-col sm:flex-row gap-3 w-full max-w-[1074px]">
           {whoCards.map(card => <WhoCard key={card.title} {...card} />)}
         </div>
       </Reveal>
@@ -186,13 +186,13 @@ function WhoSection() {
 
 function WhoCard({ icon, title, desc }) {
   return (
-    <div className="bg-white flex flex-col items-center justify-between rounded-[27px] px-7 py-10 h-[204px] flex-1">
-      <div className="icon-fill relative w-10 h-10 flex items-center justify-center">
-        <FontAwesomeIcon icon={icon} className="text-dark-brown/20 text-[40px]" />
-        <FontAwesomeIcon icon={icon} className="icon-overlay text-[40px]" />
+    <div className="bg-white flex flex-col items-center justify-between rounded-[18px] sm:rounded-[22px] lg:rounded-[27px] px-5 py-5 sm:px-5 sm:py-6 lg:px-7 lg:py-8 sm:h-[190px] lg:h-[204px] flex-1 gap-3 sm:gap-0">
+      <div className="icon-fill relative w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 flex items-center justify-center">
+        <FontAwesomeIcon icon={icon} className="text-dark-brown/20 text-[32px] sm:text-[36px] lg:text-[40px]" />
+        <FontAwesomeIcon icon={icon} className="icon-overlay text-[32px] sm:text-[36px] lg:text-[40px]" />
       </div>
-      <p className="font-extrabold text-xl text-dark-brown/80 text-center">{title}</p>
-      <div className="text-dark-brown/80 text-base font-medium text-center leading-snug">
+      <p className="font-extrabold text-base sm:text-lg lg:text-xl text-dark-brown/80 text-center">{title}</p>
+      <div className="text-dark-brown/80 text-xs sm:text-sm lg:text-base font-medium text-center leading-snug">
         {desc.map((line, i) => <p key={i}>{line}</p>)}
       </div>
     </div>
@@ -212,7 +212,7 @@ function StoryCard({ img, caption }) {
         <span className="text-[#262626] text-xs">freelab_official</span>
         <span className="text-[#0095f6] text-xs ml-auto">팔로우</span>
       </div>
-      <div className="h-[400px] relative">
+      <div className="h-[240px] sm:h-[300px] lg:h-[400px] relative">
         <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover" />
       </div>
       <div className="px-4 py-3">
@@ -235,7 +235,7 @@ function StorySection() {
       .then(data => {
         if (data.error) throw new Error(data.error.message)
         const images = (data.data || [])
-          .filter(p => p.media_type === 'IMAGE')
+          .filter(p => p.media_type === 'IMAGE' || p.media_type === 'CAROUSEL_ALBUM')
           .slice(0, 3)
           .map(p => ({ img: p.media_url, caption: p.caption || '' }))
         setPosts(images.length > 0 ? images : fallbackPosts)
@@ -245,13 +245,13 @@ function StorySection() {
   }, [])
 
   return (
-    <section className="bg-white px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+    <section className="bg-white px-6 sm:px-10 lg:px-20 xl:px-60 py-16 lg:py-24 flex flex-col gap-10 items-center">
       <Reveal from="left" className="flex flex-col gap-10 items-center w-full">
         <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-dark-brown leading-[1.2] tracking-[6.4px]">Story</p>
-          <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">프리랩이 전하는 이야기</p>
+          <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-dark-brown leading-[1.2] tracking-[6.4px]">Story</p>
+          <p className="font-bold text-lg sm:text-xl lg:text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">프리랩이 전하는 이야기</p>
         </div>
-        <div className="flex gap-10 max-w-[1240px] w-full">
+        <div className="flex flex-col sm:flex-row gap-6 lg:gap-10 max-w-[1240px] w-full">
           {loading
             ? [0, 1, 2].map(i => <StoryCardSkeleton key={i} />)
             : posts.map((post, i) => <StoryCard key={i} {...post} />)
@@ -269,7 +269,7 @@ function StoryCardSkeleton() {
         <div className="w-7 h-7 rounded-full bg-dark-brown/10 shrink-0" />
         <div className="h-3 w-24 bg-dark-brown/10 rounded" />
       </div>
-      <div className="h-[400px] bg-dark-brown/10" />
+      <div className="h-[240px] sm:h-[300px] lg:h-[400px] bg-dark-brown/10" />
       <div className="px-4 py-3 flex flex-col gap-2">
         <div className="h-4 w-full bg-dark-brown/10 rounded" />
         <div className="h-4 w-full bg-dark-brown/10 rounded" />
@@ -286,22 +286,35 @@ export default function Home() {
       <Hero />
 
       {/* About */}
-      <section className="bg-white px-6 xl:px-60 py-24">
+      <section className="bg-white px-4 sm:px-6 lg:px-20 xl:px-60 py-8 sm:py-12 lg:py-24">
         <Reveal from="left">
-        <div className="max-w-[1440px] mx-auto flex gap-7 items-center justify-center">
-          <div className="h-[375px] w-[600px] shrink-0 rounded-[18px] overflow-hidden relative">
+          {/* 모바일/태블릿: 이미지 위 오버레이 */}
+          <div className="lg:hidden w-full h-[260px] sm:h-[340px] rounded-[18px] overflow-hidden relative">
             <img src={imgs.about} alt="프리랩 공간" className="absolute inset-0 w-full h-full object-cover" />
-          </div>
-          <div className="flex flex-col items-center w-[675px]">
-            <p className="font-['Rammetto_One'] text-dark-green text-[82px] leading-[0.94] text-center tracking-[-3.3px]">
-              FREE<br />LAB
-            </p>
-            <div className="text-black text-2xl font-medium text-center leading-[1.2] tracking-[-0.24px] pb-10 mt-0">
-              <p>1인 크리에이터, 디자이너, 프리랜서를 위한 공유오피스</p>
-              <p>각자의 일에 집중하면서도, 같은 공간에서 느슨하게 연결되는 곳.</p>
+            <div className="absolute inset-0 bg-[rgba(40,40,40,0.42)]" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 sm:gap-14 px-6">
+              <img src="/img/logo-white2.png" alt="FREE LAB" className="w-44 sm:w-64 object-contain" />
+              <div className="text-white text-xs sm:text-sm font-medium text-center leading-[1.3] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+                <p>1인 크리에이터, 디자이너, 프리랜서를 위한 공유오피스</p>
+                <p>각자의 일에 집중하면서도, 같은 공간에서 느슨하게 연결되는 곳.</p>
+              </div>
             </div>
           </div>
-        </div>
+          {/* 데스크탑: 이미지 + 텍스트 나란히 */}
+          <div className="hidden lg:flex max-w-[1440px] mx-auto gap-7 items-center justify-center">
+            <div className="w-[600px] h-[375px] shrink-0 rounded-[18px] overflow-hidden relative">
+              <img src={imgs.about} alt="프리랩 공간" className="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div className="flex flex-col items-center w-[675px]">
+              <p className="font-['Rammetto_One'] text-dark-green text-[82px] leading-[0.94] text-center tracking-[-3.3px]">
+                FREE<br />LAB
+              </p>
+              <div className="text-black text-2xl font-medium text-center leading-[1.2] tracking-[-0.24px] pb-10 mt-0">
+                <p>1인 크리에이터, 디자이너, 프리랜서를 위한 공유오피스</p>
+                <p>각자의 일에 집중하면서도, 같은 공간에서 느슨하게 연결되는 곳.</p>
+              </div>
+            </div>
+          </div>
         </Reveal>
       </section>
 
@@ -309,26 +322,26 @@ export default function Home() {
       <WhoSection />
 
       {/* Space */}
-      <section className="bg-white px-6 xl:px-60 py-24 flex flex-col gap-10 items-center">
+      <section className="bg-white px-6 sm:px-10 lg:px-20 xl:px-60 py-16 lg:py-24 flex flex-col gap-10 items-center">
         <Reveal from="left" className="flex flex-col gap-10 items-center w-full">
-        <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-dark-green leading-[1.2] tracking-[6.4px]">Space</p>
-          <p className="font-bold text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">당신이 몰입 할 수 있도록</p>
-        </div>
-        <div className="grid grid-cols-2 gap-10">
-          {[imgs.space1, imgs.space2, imgs.space3, imgs.space4].map((src, i) => (
-            <div key={i} className="w-[600px] h-[375px] rounded-[18px] overflow-hidden relative">
-              <img src={src} alt="프리랩 공간" className="absolute inset-0 w-full h-full object-cover" />
-            </div>
-          ))}
-        </div>
-        <div className="text-dark-brown/80 text-2xl font-medium text-center leading-[1.5] tracking-[2.4px]">
-          <p>프리랩은 정적으로 내려앉은 공간이 아닌</p>
-          <p>간단한 인사, 키보드 소리처럼 작업 소음들이 백색소음처럼 자연스럽게 흐르는 공간입니다.</p>
-        </div>
-        <Btn to="/about" icon={faArrowRight}>
-          공간소개
-        </Btn>
+          <div className="flex flex-col gap-3 items-center">
+            <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-dark-green leading-[1.2] tracking-[6.4px]">Space</p>
+            <p className="font-bold text-lg sm:text-xl lg:text-2xl text-dark-brown/80 leading-[1.2] tracking-[2.4px]">당신이 몰입 할 수 있도록</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-10 w-full">
+            {[imgs.space1, imgs.space2, imgs.space3, imgs.space4].map((src, i) => (
+              <div key={i} className="w-full h-[220px] sm:h-[280px] lg:h-[375px] rounded-[18px] overflow-hidden relative">
+                <img src={src} alt="프리랩 공간" className="absolute inset-0 w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
+          <div className="text-dark-brown/80 text-base sm:text-lg lg:text-2xl font-medium text-center leading-[1.5] tracking-[2.4px]">
+            <p>프리랩은 정적으로 내려앉은 공간이 아닌</p>
+            <p>간단한 인사, 키보드 소리처럼 작업 소음들이 백색소음처럼 자연스럽게 흐르는 공간입니다.</p>
+          </div>
+          <Btn to="/about" icon={faArrowRight}>
+            공간소개
+          </Btn>
         </Reveal>
       </section>
 

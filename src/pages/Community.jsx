@@ -24,7 +24,7 @@ const instaGradient = 'linear-gradient(45deg, #f58529, #dd2a7b, #8134af)'
 
 function InstaCard({ img, likes, caption, comments, date }) {
   return (
-    <div className="bg-white border border-[#dbdbdb] rounded-xl overflow-hidden w-[359px]">
+    <div className="bg-white border border-[#dbdbdb] rounded-xl overflow-hidden w-full">
       <div className="flex items-center justify-between px-3 py-2">
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 rounded-full shrink-0" style={{ background: instaGradient }} />
@@ -32,7 +32,7 @@ function InstaCard({ img, likes, caption, comments, date }) {
         </div>
         <span className="text-[#0095f6] text-[11px]">팔로우</span>
       </div>
-      <div className="h-[357px] relative">
+      <div className="h-[220px] sm:h-[280px] lg:h-[357px] relative">
         <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover" />
       </div>
       <div className="px-3 py-2">
@@ -55,8 +55,8 @@ function InstaCard({ img, likes, caption, comments, date }) {
 
 function YTCard({ img, title, channel, views, date }) {
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-[2px_4px_6.7px_rgba(0,0,0,0.1)] w-[360px]">
-      <div className="h-[200px] relative bg-[#f0f0f0]">
+    <div className="bg-white rounded-2xl overflow-hidden shadow-[2px_4px_6.7px_rgba(0,0,0,0.1)] w-full">
+      <div className="h-[180px] sm:h-[200px] relative bg-[#f0f0f0]">
         <img src={img} alt={title} className="absolute inset-0 w-full h-full object-cover" />
       </div>
       <div className="flex gap-3 p-4 items-start">
@@ -78,38 +78,38 @@ export default function Community() {
     <div className="bg-white">
 
       {/* MEMBER */}
-      <section className="px-6 xl:px-60 py-[100px] flex flex-col items-center gap-[100px]">
-        <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">MEMBER</p>
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col items-center gap-10 sm:gap-16 lg:gap-[100px]">
+        <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">MEMBER</p>
         <div
-          className="px-10 py-5 flex flex-col items-center gap-1 text-white"
+          className="px-6 sm:px-10 py-4 sm:py-5 flex flex-col items-center gap-1 text-white w-full sm:w-auto"
           style={{ background: 'rgb(220, 161, 129)' }}
         >
-          <p className="text-2xl font-light leading-[0.94]">프리랩 맴버 모집중!</p>
-          <p className="font-['Dela_Gothic_One'] text-[36px] leading-[0.94]">COME JOIN US</p>
+          <p className="text-lg sm:text-xl lg:text-2xl font-light leading-[0.94]">프리랩 맴버 모집중!</p>
+          <p className="font-['Dela_Gothic_One'] text-2xl sm:text-[30px] lg:text-[36px] leading-[0.94]">COME JOIN US</p>
         </div>
       </section>
 
       {/* SOCIAL */}
-      <section className="px-6 xl:px-60 py-[100px] flex flex-col items-center gap-[100px]">
-        <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">SOCIAL</p>
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col items-center gap-10 sm:gap-16 lg:gap-[100px]">
+        <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">SOCIAL</p>
 
         {/* 인스타그램 */}
-        <div className="flex gap-6 justify-between w-[1100px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 w-full">
           {instaPosts.map((post, i) => <InstaCard key={i} {...post} />)}
         </div>
 
         {/* 유튜브 */}
-        <div className="flex gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 w-full">
           {ytVideos.map((v, i) => <YTCard key={i} {...v} />)}
         </div>
       </section>
 
       {/* 주의사항 */}
-      <section className="px-6 xl:px-60 py-[100px] flex flex-col gap-3">
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col gap-3">
         {notices.map((n, i) => (
           <div key={i} className="flex gap-3 items-start">
-            <div className="mt-[7px] w-[10px] h-[20px] bg-terracotta/70 rounded-full shrink-0" />
-            <p className="text-2xl text-[#4b4842] leading-normal tracking-[-0.48px]">{n}</p>
+            <div className="mt-[5px] sm:mt-[7px] w-[8px] sm:w-[10px] h-[16px] sm:h-[20px] bg-terracotta/70 rounded-full shrink-0" />
+            <p className="text-base sm:text-lg lg:text-2xl text-[#4b4842] leading-normal tracking-[-0.48px]">{n}</p>
           </div>
         ))}
       </section>

@@ -50,14 +50,14 @@ const refunds = [
 function PriceRow({ label, unit, price, highlight }) {
   return (
     <div className={`flex items-center justify-between w-full px-1 py-1 ${highlight ? 'bg-[#faf5bd] rounded' : ''}`}>
-      <div className="flex items-baseline gap-1">
-        <span className="font-bold text-[30px] text-dark-brown tracking-[-1.8px]">{label}</span>
-        {unit && <span className="font-semibold text-[18px] text-dark-brown/70">{unit}</span>}
+      <div className="flex items-baseline gap-1 flex-wrap">
+        <span className="font-bold text-xl sm:text-2xl lg:text-[30px] text-dark-brown tracking-[-1.8px]">{label}</span>
+        {unit && <span className="font-semibold text-sm sm:text-base lg:text-[18px] text-dark-brown/70">{unit}</span>}
         {highlight && (
           <span className="ml-1 bg-white border border-[#e0e0e0] text-terracotta text-xs font-bold px-2 py-0.5 rounded-full">BEST</span>
         )}
       </div>
-      <span className="font-bold text-[30px] text-dark-brown">{price}</span>
+      <span className="font-bold text-xl sm:text-2xl lg:text-[30px] text-dark-brown shrink-0">{price}</span>
     </div>
   )
 }
@@ -67,27 +67,27 @@ export default function Pricing() {
     <div className="bg-white">
 
       {/* PRICE 헤더 + 카드 섹션 */}
-      <section className="px-6 xl:px-60 py-[100px] flex flex-col items-center gap-10">
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col items-center gap-8 lg:gap-10">
 
         {/* 타이틀 */}
-        <div className="flex flex-col gap-3 items-center py-[100px]">
-          <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">PRICE</p>
-          <p className="font-medium text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">합리적인 가격으로 프리랩을 사용하세요</p>
+        <div className="flex flex-col gap-3 items-center py-8 sm:py-12 lg:py-[100px]">
+          <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">PRICE</p>
+          <p className="font-medium text-base sm:text-xl lg:text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px] text-center">합리적인 가격으로 프리랩을 사용하세요</p>
         </div>
 
         {/* 가격 카드 그리드 */}
-        <div className="grid grid-cols-2 gap-[30px] w-[1000px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-[30px] w-full lg:w-[1000px]">
 
           {/* 자유석 */}
-          <div className="border border-[#4b4842]/20 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center">
-            <p className="font-extrabold text-[45px] text-dark-green text-center">자유석</p>
+          <div className="border border-[#4b4842]/20 rounded-[22px] px-5 sm:px-7 py-8 sm:py-[52px] flex flex-col gap-8 sm:gap-[52px] items-center">
+            <p className="font-extrabold text-2xl sm:text-3xl lg:text-[45px] text-dark-green text-center">자유석</p>
             <PriceRow label="1일 권" unit="" price="15,000" highlight={false} />
           </div>
 
-          {/* 프라이빗 전용석 — row span 2 */}
-          <div className="border border-[#4b4842]/20 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center row-span-2">
-            <p className="font-extrabold text-[45px] text-dark-green text-center">프라이빗 전용석</p>
-            <div className="flex flex-col gap-7 w-full">
+          {/* 프라이빗 전용석 — 데스크탑에서 row span 2 */}
+          <div className="border border-[#4b4842]/20 rounded-[22px] px-5 sm:px-7 py-8 sm:py-[52px] flex flex-col gap-8 sm:gap-[52px] items-center lg:row-span-2">
+            <p className="font-extrabold text-2xl sm:text-3xl lg:text-[45px] text-dark-green text-center">프라이빗 전용석</p>
+            <div className="flex flex-col gap-4 sm:gap-7 w-full">
               {dedicated.map(row => (
                 <PriceRow key={row.label} {...row} />
               ))}
@@ -95,9 +95,9 @@ export default function Pricing() {
           </div>
 
           {/* 팟캐스트 스튜디오 */}
-          <div className="border border-[#4b4842]/20 rounded-[22px] px-7 py-[52px] flex flex-col gap-[52px] items-center">
-            <p className="font-extrabold text-[45px] text-dark-green text-center">팟캐스트 스튜디오</p>
-            <div className="flex flex-col gap-7 w-full">
+          <div className="border border-[#4b4842]/20 rounded-[22px] px-5 sm:px-7 py-8 sm:py-[52px] flex flex-col gap-8 sm:gap-[52px] items-center">
+            <p className="font-extrabold text-2xl sm:text-3xl lg:text-[45px] text-dark-green text-center">팟캐스트 스튜디오</p>
+            <div className="flex flex-col gap-4 sm:gap-7 w-full">
               <PriceRow label="1시간" unit="(1인)" price="60,000"  highlight={false} />
               <PriceRow label="2시간" unit="(1인)" price="100,000" highlight={false} />
             </div>
@@ -105,22 +105,22 @@ export default function Pricing() {
         </div>
 
         {/* 연계 혜택 표 */}
-        <div className="border border-[#4b4842]/20 rounded-[24px] p-[54px] w-[1000px]">
-          <p className="font-extrabold text-[50px] text-dark-green text-center mb-9 tracking-[-1px]">전용석 + 스튜디오 연계 혜택</p>
+        <div className="border border-[#4b4842]/20 rounded-[24px] p-5 sm:p-8 lg:p-[54px] w-full lg:w-[1000px]">
+          <p className="font-extrabold text-2xl sm:text-3xl lg:text-[50px] text-dark-green text-center mb-6 lg:mb-9 tracking-[-1px]">전용석 + 스튜디오 연계 혜택</p>
           <table className="w-full">
             <thead>
-              <tr className="border-b-2 border-dark-brown text-[22px] font-bold text-dark-brown">
-                <th className="text-left py-4 px-4 tracking-[-0.4px]">멤버십 종류</th>
-                <th className="text-center py-4 tracking-[-0.4px]">팟캐스트 스튜디오 할인</th>
-                <th className="text-center py-4 tracking-[-0.4px]">녹음부스 할인</th>
+              <tr className="border-b-2 border-dark-brown text-sm sm:text-base lg:text-[22px] font-bold text-dark-brown">
+                <th className="text-left py-3 sm:py-4 px-2 sm:px-4 tracking-[-0.4px]">멤버십 종류</th>
+                <th className="text-center py-3 sm:py-4 tracking-[-0.4px]">팟캐스트 스튜디오</th>
+                <th className="text-center py-3 sm:py-4 tracking-[-0.4px]">녹음부스</th>
               </tr>
             </thead>
             <tbody>
               {benefits.map(({ type, studio, booth }) => (
-                <tr key={type} className="border-b border-[#e0e0e0] text-[20px] text-dark-brown tracking-[-0.4px]">
-                  <td className="font-semibold py-4 px-4">{type}</td>
-                  <td className="text-center py-4">{studio}</td>
-                  <td className="text-center py-4">{booth}</td>
+                <tr key={type} className="border-b border-[#e0e0e0] text-xs sm:text-base lg:text-[20px] text-dark-brown tracking-[-0.4px]">
+                  <td className="font-semibold py-3 sm:py-4 px-2 sm:px-4">{type}</td>
+                  <td className="text-center py-3 sm:py-4">{studio}</td>
+                  <td className="text-center py-3 sm:py-4">{booth}</td>
                 </tr>
               ))}
             </tbody>
@@ -135,21 +135,21 @@ export default function Pricing() {
       </section>
 
       {/* 환불 규정 */}
-      <section className="bg-cream px-6 xl:px-60 py-[100px] flex flex-col items-center gap-10">
+      <section className="bg-cream px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col items-center gap-8 lg:gap-10">
         <div className="flex flex-col gap-3 items-center">
-          <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">Refund Policy</p>
-          <p className="font-medium text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">환불규정</p>
+          <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">Refund Policy</p>
+          <p className="font-medium text-lg sm:text-xl lg:text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">환불규정</p>
         </div>
 
-        <div className="border border-[#4b4842]/20 rounded-[22px] overflow-hidden w-[1000px]">
+        <div className="border border-[#4b4842]/20 rounded-[22px] overflow-hidden w-full lg:w-[1000px]">
           <table className="w-full text-[#262626]">
             <tbody>
               {refunds.map(({ cond, desc, note }, i) => (
                 <tr key={i} className={i < refunds.length - 1 ? 'border-b border-[#4b4842]/10' : ''}>
-                  <td className="px-8 py-6 align-top w-[240px] whitespace-pre-line font-semibold text-base text-dark-brown">{cond}</td>
-                  <td className="px-8 py-6 align-top text-base">
+                  <td className="px-4 sm:px-8 py-4 sm:py-6 align-top w-1/3 sm:w-[240px] whitespace-pre-line font-semibold text-xs sm:text-base text-dark-brown">{cond}</td>
+                  <td className="px-4 sm:px-8 py-4 sm:py-6 align-top text-xs sm:text-base">
                     <p className="text-dark-brown">{desc}</p>
-                    {note && <p className="text-dark-brown/50 mt-1 text-sm">{note}</p>}
+                    {note && <p className="text-dark-brown/50 mt-1 text-xs sm:text-sm">{note}</p>}
                   </td>
                 </tr>
               ))}
@@ -159,10 +159,10 @@ export default function Pricing() {
       </section>
 
       {/* 주의사항 */}
-      <section className="px-6 xl:px-60 py-[100px]">
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px]">
         <div className="flex gap-3 items-start">
-          <div className="mt-[7px] w-[10px] h-[20px] bg-terracotta/70 rounded-full shrink-0" />
-          <p className="text-2xl text-[#4b4842] leading-normal tracking-[-0.48px]">
+          <div className="mt-[5px] sm:mt-[7px] w-2 sm:w-[10px] h-4 sm:h-[20px] bg-terracotta/70 rounded-full shrink-0" />
+          <p className="text-sm sm:text-base lg:text-2xl text-[#4b4842] leading-normal tracking-[-0.48px]">
             팟캐스트 스튜디오에서는 물 이외의 음식은 반입 및 취식이 불가합니다 :) 간식은 스튜디오 바로 앞 휴게 라운지에서 즐겨주세요!
           </p>
         </div>

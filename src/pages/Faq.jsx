@@ -92,15 +92,15 @@ function AccordionItem({ q, a }) {
     <div className="border-b border-[#e0e0e0] last:border-0">
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between py-6 text-left gap-6"
+        className="w-full flex items-center justify-between py-4 sm:py-6 text-left gap-4 sm:gap-6"
       >
-        <span className="font-semibold text-xl text-dark-brown leading-snug tracking-[-0.4px]">{q}</span>
+        <span className="font-semibold text-base sm:text-xl text-dark-brown leading-snug tracking-[-0.4px]">{q}</span>
         <span className={`text-dark-green shrink-0 transition-transform duration-300 ${open ? 'rotate-0' : ''}`}>
-          <FontAwesomeIcon icon={open ? faMinus : faPlus} className="text-lg" />
+          <FontAwesomeIcon icon={open ? faMinus : faPlus} className="text-base sm:text-lg" />
         </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${open ? 'max-h-96 pb-6' : 'max-h-0'}`}>
-        <p className="text-dark-brown/70 text-lg leading-relaxed tracking-[-0.3px]">{a}</p>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${open ? 'max-h-96 pb-4 sm:pb-6' : 'max-h-0'}`}>
+        <p className="text-dark-brown/70 text-sm sm:text-lg leading-relaxed tracking-[-0.3px]">{a}</p>
       </div>
     </div>
   )
@@ -111,20 +111,20 @@ export default function Faq() {
     <div className="bg-white">
 
       {/* 헤더 */}
-      <section className="px-6 xl:px-60 py-[100px] flex flex-col items-center gap-3">
-        <p className="font-black text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">F&Q</p>
-        <p className="font-medium text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">자주 묻는 질문</p>
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-[100px] flex flex-col items-center gap-3">
+        <p className="font-black text-[40px] sm:text-[52px] lg:text-[64px] text-[#4b4842] leading-[1.2] tracking-[6.4px]">F&Q</p>
+        <p className="font-medium text-lg sm:text-xl lg:text-2xl text-[#4b4842] leading-[1.2] tracking-[2.4px]">자주 묻는 질문</p>
       </section>
 
       {/* 아코디언 */}
-      <section className="px-6 xl:px-60 pb-[100px] flex flex-col gap-16">
+      <section className="px-6 sm:px-10 lg:px-20 xl:px-60 pb-12 sm:pb-16 lg:pb-[100px] flex flex-col gap-10 sm:gap-16">
         {faqs.map(({ category, items }) => (
           <div key={category}>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-1.5 h-7 bg-dark-green rounded-full" />
-              <h2 className="font-bold text-2xl text-dark-green tracking-[-0.4px]">{category}</h2>
+            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="w-1.5 h-6 sm:h-7 bg-dark-green rounded-full" />
+              <h2 className="font-bold text-xl sm:text-2xl text-dark-green tracking-[-0.4px]">{category}</h2>
             </div>
-            <div className="bg-cream rounded-2xl px-8">
+            <div className="bg-cream rounded-2xl px-4 sm:px-8">
               {items.map((item, i) => (
                 <AccordionItem key={i} {...item} />
               ))}
